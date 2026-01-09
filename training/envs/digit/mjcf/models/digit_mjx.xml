@@ -1,0 +1,100 @@
+<mujoco model='digit-v3'>
+    <compiler angle="degree" meshdir="../assets" autolimits="true"/>
+
+    <option iterations="3" ls_iterations="5" timestep="0.002" integrator="Euler">
+        <flag eulerdamp="disable"/>
+    </option>
+
+    <!-- Notes: Remove shin. Remove heel-spring Remove toe a/b and toe a/b-rod. -->
+    <default>
+        <default class="digit">
+            <geom friction="0.6" contype="0" conaffinity="0" type="mesh"/>
+            <joint axis="0 0 1" damping="1" frictionloss="1" armature="0.01"/>
+            <default class="digit/hip">
+                <default class="digit/hip/roll">
+                    <joint range="-60 60" armature="0.173824"/>
+                </default>
+                <default class="digit/hip/yaw">
+                    <joint range="-40 40" armature="0.0679"/>
+                </default>
+                <default class="digit/hip/pitch">
+                    <joint axis="0 0 -1" armature="0.120473"/>
+                    <default class="digit/hip/pitch/left">
+                        <joint range="-60 90"/>
+                    </default>
+                    <default class="digit/hip/pitch/right">
+                        <joint range="-90 60"/>
+                    </default>
+                </default>
+            </default>
+            <default class="digit/achilles-rod">
+                <joint type="ball" limited='false'/>
+            </default>
+            <default class="digit/knee">
+                <default class="digit/knee/left">
+                    <joint range="-80 58.4" armature="0.120473"/>
+                </default>
+                <default class="digit/knee/right">
+                    <joint range="58.4 80" armature="0.120473"/>
+                </default>
+            </default>
+            <default class="digit/shin">
+                <joint stiffness="6000" limited="false"/>
+            </default>
+            <default class="digit/tarsus">
+                <default class="digit/tarsus/left">
+                    <joint range="-50.3 71.6"/>
+                </default>
+                <default class="digit/tarsus/right">
+                    <joint range="-71.6 50.3"/>
+                </default>
+            </default>
+            <default class="digit/heel-spring">
+                <joint range="-6 6" stiffness="4375"/>
+            </default>
+            <default class="digit/toe">
+                <default class="digit/toe/toe-a">
+                    <joint armature="0.036089"/>
+                    <default class="digit/toe/toe-a/left">
+                        <joint range="-46.2755 44.9815"/>
+                    </default>
+                    <default class="digit/toe/toe-a/right">
+                        <joint range="-44.9815 46.2755"/>
+                    </default>
+                </default>
+                <default class="digit/toe/toe-a-rod">
+                    <joint type="ball" limited="false"/>
+                </default>
+                <default class="digit/toe/toe-b">
+                    <joint armature="0.036089"/>
+                    <default class="digit/toe/toe-b/left">
+                        <joint range="-45.8918 45.5476"/>
+                    </default>
+                    <default class="digit/toe/toe-b/right">
+                        <joint range="-45.5476 45.8918"/>
+                    </default>
+                </default>
+                <default class="digit/toe/toe-b-rod">
+                    <joint type="ball" limited="false"/>
+                </default>
+                <default class="digit/toe/pitch">
+                    <default class="digit/toe/pitch/left">
+                        <joint range="-44 34"/>
+                    </default>
+                    <default class="digit/toe/pitch/right">
+                        <joint range="-34 44"/>
+                    </default>
+                </default>
+                <default class="digit/toe/roll">
+                    <default class="digit/toe/roll/left">
+                        <joint range="-37 33"/>
+                    </default>
+                    <default class="digit/toe/roll/right">
+                        <joint range="-33 37"/>
+                    </default>
+                </default>
+            </default>
+            
+        </default>
+    </default>
+</mujoco>
