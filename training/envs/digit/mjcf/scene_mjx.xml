@@ -1,0 +1,6 @@
+<mujoco model="digit-mjx scene">
+    <include file="models/digit_mjx.xml"/>
+
+    <statistic center="0 0 0.1" extent="0.8"/>
+
+</mujoco>

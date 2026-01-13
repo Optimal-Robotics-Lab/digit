@@ -1,100 +1,542 @@
-<mujoco model='digit-v3'>
-    <compiler angle="degree" meshdir="../assets" autolimits="true"/>
+<mujoco model="digit-v3">
+    <compiler angle="degree" meshdir="../../assets" autolimits="true" />
 
     <option iterations="3" ls_iterations="5" timestep="0.002" integrator="Euler">
-        <flag eulerdamp="disable"/>
+        <flag eulerdamp="disable" />
     </option>
 
     <!-- Notes: Remove shin. Remove heel-spring Remove toe a/b and toe a/b-rod. -->
     <default>
         <default class="digit">
-            <geom friction="0.6" contype="0" conaffinity="0" type="mesh"/>
-            <joint axis="0 0 1" damping="1" frictionloss="1" armature="0.01"/>
+            <geom friction="0.6" contype="0" conaffinity="0" type="mesh" />
+            <joint axis="0 0 1" damping="1" frictionloss="1" armature="0.01" />
             <default class="digit/hip">
                 <default class="digit/hip/roll">
-                    <joint range="-60 60" armature="0.173824"/>
+                    <joint range="-60 60" armature="0.173824" />
                 </default>
                 <default class="digit/hip/yaw">
-                    <joint range="-40 40" armature="0.0679"/>
+                    <joint range="-40 40" armature="0.0679" />
                 </default>
                 <default class="digit/hip/pitch">
-                    <joint axis="0 0 -1" armature="0.120473"/>
+                    <joint axis="0 0 -1" armature="0.120473" />
                     <default class="digit/hip/pitch/left">
-                        <joint range="-60 90"/>
+                        <joint range="-60 90" />
                     </default>
                     <default class="digit/hip/pitch/right">
-                        <joint range="-90 60"/>
+                        <joint range="-90 60" />
                     </default>
                 </default>
             </default>
             <default class="digit/achilles-rod">
-                <joint type="ball" limited='false'/>
+                <joint type="ball" limited="false" />
             </default>
             <default class="digit/knee">
                 <default class="digit/knee/left">
-                    <joint range="-80 58.4" armature="0.120473"/>
+                    <joint range="-80 58.4" armature="0.120473" />
                 </default>
                 <default class="digit/knee/right">
-                    <joint range="58.4 80" armature="0.120473"/>
+                    <joint range="-58.4 80" armature="0.120473" />
                 </default>
             </default>
             <default class="digit/shin">
-                <joint stiffness="6000" limited="false"/>
+                <joint stiffness="6000" limited="false" />
             </default>
             <default class="digit/tarsus">
                 <default class="digit/tarsus/left">
-                    <joint range="-50.3 71.6"/>
+                    <joint range="-50.3 71.6" />
                 </default>
                 <default class="digit/tarsus/right">
-                    <joint range="-71.6 50.3"/>
+                    <joint range="-71.6 50.3" />
                 </default>
             </default>
             <default class="digit/heel-spring">
-                <joint range="-6 6" stiffness="4375"/>
+                <joint range="-6 6" stiffness="4375" />
             </default>
             <default class="digit/toe">
                 <default class="digit/toe/toe-a">
-                    <joint armature="0.036089"/>
+                    <joint armature="0.036089" />
                     <default class="digit/toe/toe-a/left">
-                        <joint range="-46.2755 44.9815"/>
+                        <joint range="-46.2755 44.9815" />
                     </default>
                     <default class="digit/toe/toe-a/right">
-                        <joint range="-44.9815 46.2755"/>
+                        <joint range="-44.9815 46.2755" />
                     </default>
                 </default>
                 <default class="digit/toe/toe-a-rod">
-                    <joint type="ball" limited="false"/>
+                    <joint type="ball" limited="false" />
                 </default>
                 <default class="digit/toe/toe-b">
-                    <joint armature="0.036089"/>
+                    <joint armature="0.036089" />
                     <default class="digit/toe/toe-b/left">
-                        <joint range="-45.8918 45.5476"/>
+                        <joint range="-45.8918 45.5476" />
                     </default>
                     <default class="digit/toe/toe-b/right">
-                        <joint range="-45.5476 45.8918"/>
+                        <joint range="-45.5476 45.8918" />
                     </default>
                 </default>
                 <default class="digit/toe/toe-b-rod">
-                    <joint type="ball" limited="false"/>
+                    <joint type="ball" limited="false" />
                 </default>
                 <default class="digit/toe/pitch">
                     <default class="digit/toe/pitch/left">
-                        <joint range="-44 34"/>
+                        <joint range="-44 34" />
                     </default>
                     <default class="digit/toe/pitch/right">
-                        <joint range="-34 44"/>
+                        <joint range="-34 44" />
                     </default>
                 </default>
                 <default class="digit/toe/roll">
                     <default class="digit/toe/roll/left">
-                        <joint range="-37 33"/>
+                        <joint range="-37 33" />
                     </default>
                     <default class="digit/toe/roll/right">
-                        <joint range="-33 37"/>
+                        <joint range="-33 37" />
                     </default>
                 </default>
             </default>
-            
+        </default>
+        <default class="digit/arm">
+            <joint axis="0 0 1" armature="0.173824" />
+            <default class="digit/shoulder/roll">
+                <joint range="-75 75" />
+            </default>
+            <default class="digit/shoulder/pitch">
+                <joint axis="0 0 -1" range="-145 145" />
+            </default>
+            <default class="digit/shoulder/yaw">
+                <joint range="-100 100" armature="0.0679" />
+            </default>
+            <default class="digit/elbow">
+                <joint range="-77.5 77.5" />
+            </default>
+        </default>
+        <default class="collision">
+            <geom conaffinity="1" condim="3" contype="1" />
         </default>
     </default>
+
+    <asset>
+        <material name="collision" rgba="0.1 0.5 0.9 0.4" />
+        <material name="robot" rgba="0.9 0.5 0.1 1" />
+        <mesh name="base-0" file="torso.obj" />
+        <mesh name="base-1" file="hip-roll-housing.obj" />
+        <mesh name="base-2" file="hip-roll-housing-xz.obj" />
+        <mesh name="base-3" file="shoulder-roll-housing.obj" />
+        <mesh name="base-4" file="shoulder-roll-housing-xz.obj" />
+        <mesh name="left-hip-roll" file="hip-yaw-housing.obj" />
+        <mesh name="left-hip-yaw" file="hip-pitch-housing.obj" />
+        <mesh name="left-hip-pitch" file="hip-pitch.obj" />
+        <mesh name="left-achilles-rod" file="achilles-rod.obj" />
+        <mesh name="left-knee" file="knee.obj" />
+        <mesh name="left-shin" file="shin.obj" />
+        <mesh name="left-tarsus" file="tarsus.obj" />
+        <mesh name="left-heel-spring" file="heel-spring.obj" />
+        <mesh name="left-toe-a" file="toe-output.obj" />
+        <mesh name="left-toe-a-rod" file="toe-a-rod.obj" />
+        <mesh name="left-toe-b" file="toe-output.obj" />
+        <mesh name="left-toe-b-rod" file="toe-b-rod.obj" />
+        <mesh name="left-toe-pitch" file="toe-pitch.obj" />
+        <mesh name="left-toe-roll" file="toe-roll.obj" />
+        <mesh name="left-shoulder-roll" file="arm-l1.obj" />
+        <mesh name="left-shoulder-pitch" file="arm-l2.obj" />
+        <mesh name="left-shoulder-yaw" file="arm-l3.obj" />
+        <mesh name="left-elbow" file="arm-l4.obj" />
+        <mesh name="right-hip-roll" file="hip-yaw-housing-xz.obj" />
+        <mesh name="right-hip-yaw" file="hip-pitch-housing-xz.obj" />
+        <mesh name="right-hip-pitch" file="hip-pitch-xz.obj" />
+        <mesh name="right-achilles-rod" file="achilles-rod-xz.obj" />
+        <mesh name="right-knee" file="knee-xz.obj" />
+        <mesh name="right-shin" file="shin-xz.obj" />
+        <mesh name="right-tarsus" file="tarsus-xz.obj" />
+        <mesh name="right-heel-spring" file="heel-spring-xz.obj" />
+        <mesh name="right-toe-a" file="toe-output-xz.obj" />
+        <mesh name="right-toe-a-rod" file="toe-a-rod-xz.obj" />
+        <mesh name="right-toe-b" file="toe-output-xz.obj" />
+        <mesh name="right-toe-b-rod" file="toe-b-rod-xz.obj" />
+        <mesh name="right-toe-pitch" file="toe-pitch-xz.obj" />
+        <mesh name="right-toe-roll" file="toe-roll-xz.obj" />
+        <mesh name="right-shoulder-roll" file="arm-l1-xz.obj" />
+        <mesh name="right-shoulder-pitch" file="arm-l2-xz.obj" />
+        <mesh name="right-shoulder-yaw" file="arm-l3-xz.obj" />
+        <mesh name="right-elbow" file="arm-l4-xz.obj" />
+    </asset>
+
+    <worldbody>
+        <body name="base">
+            <inertial pos="0.001637 0.0002 0.259307" mass="15.028392"
+                fullinertia="0.375905 0.344193 0.098732 -8.8e-05 0.0085 6.6e-05" />
+            <joint type="free" limited="false" />
+            <geom class="digit" mesh="base-0" material="robot" />
+            <geom class="digit" mesh="base-1" pos="-0.001 0.091 0" euler="0 -90 0" material="robot" />
+            <geom class="digit" mesh="base-2" pos="-0.001 -0.091 0" euler="0 -90 0" material="robot" />
+            <geom class="digit" mesh="base-3" pos="-0.001 0.12 0.4" euler="-10 -90 0"
+                material="robot" />
+            <geom class="digit" mesh="base-4" pos="-0.001 -0.12 0.4" euler="10 -90 0"
+                material="robot" />
+            <!-- Why do these collision geometries have mass -->
+            <geom type="box" size="0.0975 0.087 0.245" pos="0.008 0 0.21"
+                friction="0.7 0.01 0.005" mass="15.028392" class="collision" />
+            <geom type="cylinder" size="0.05 0.0325" pos="0.02 0 0.49"
+                friction="0.7 0.01 0.005" mass="15.028392" class="collision" />
+            <body name="left-hip-roll" pos="-0.001 0.091 0" euler="21.5 -90 0">
+                <inertial pos="-0.001967 0.000244 0.031435" mass="0.915088"
+                    fullinertia="0.001017 0.001148 0.000766 -3e-06 1.3e-05 -4e-06" />
+                <joint name="left-hip-roll" class="digit/hip/roll" />
+                <geom class="digit" mesh="left-hip-roll" material="robot" />
+                <body name="left-hip-yaw" pos="-0.0505 0 0.044" euler="0 -90 0">
+                    <inertial pos="1e-05 -0.001945 0.042033" mass="0.818753"
+                        fullinertia="0.001627 0.001929 0.00077 -1e-06 2e-06 5.3e-05" />
+                    <joint class="digit/hip/yaw" name="left-hip-yaw" />
+                    <geom class="digit" mesh="left-hip-yaw" material="robot" />
+                    <body name="left-hip-pitch" pos="0 0.004 0.068" euler="90 0 135">
+                        <inertial pos="0.060537 0.000521 -0.038857" mass="6.244279"
+                            fullinertia="0.011533 0.033345 0.033958 -0.000171 0.000148 0.000178" />
+                        <joint class="digit/hip/pitch/left" name="left-hip-pitch" />
+                        <geom class="digit" mesh="left-hip-pitch" material="robot" />
+                        <!-- Collision Geometries have mass -->
+                        <geom type="cylinder" size="0.05 0.072" pos="0 0 -0.04"
+                            friction="0.7 0.01 0.005" contype="4" conaffinity="3" mass="6.244279"
+                            class="collision" />
+                        <geom type="cylinder" size="0.05 0.072" pos="0.12 0 -0.04"
+                            friction="0.7 0.01 0.005" contype="4" conaffinity="3" mass="6.244279"
+                            class="collision" />
+                        <geom type="box" size="0.06 0.05 0.072" pos="0.06 0 -0.04"
+                            friction="0.7 0.01 0.005" contype="4" conaffinity="3" mass="6.244279"
+                            class="collision" />
+                        <body name="left-achilles-rod" pos="0 0 0.046" euler="4.09 0.05 -82.27">
+                            <inertial pos="0.2506 0 0" mass="0.178148"
+                                fullinertia="3e-06 0.004501 0.004501 0 0 0" />
+                            <joint class="digit/achilles-rod" name="left-achilles-rod" />
+                            <geom class="digit" mesh="left-achilles-rod" material="robot" />
+                            <!-- Collision Geometries have mass -->
+                            <geom type="capsule" size="0.007 0.25" pos="0.25 0 0" euler="4 90 0"
+                                friction="0.7 0.01 0.005" contype="4" conaffinity="3"
+                                mass="0.178148" class="collision" />
+                        </body>
+                        <body name="left-knee" pos="0.12 0 0.0045" euler="0 0 -90">
+                            <inertial pos="0.045641 0.042154 0.001657" mass="1.227077"
+                                fullinertia="0.002643 0.005098 0.007019 -0.001832 6.6e-05 4.5e-05" />
+                            <joint class="digit/knee/left" name="left-knee" />
+                            <geom class="digit" mesh="left-knee" material="robot" />
+                            <body name="left-shin" pos="0.060677 0.047406 0">
+                                <inertial pos="0.174265 0.010265 0.00107" mass="0.895793"
+                                    fullinertia="0.001128 0.022492 0.022793 0.001098 0.000196 -3e-06" />
+                                <joint class="digit/shin" name="left-shin" />
+                                <geom class="digit" mesh="left-shin" material="robot" />
+                                <!-- Collision Geometries have mass -->
+                                <geom type="cylinder" size="0.03 0.1715" pos="0.23 0 0"
+                                    euler="0 90 0" friction="0.7 0.01 0.005" contype="4"
+                                    conaffinity="3" mass="0.895793" class="collision" />
+                                <geom type="cylinder" size="0.05 0.1" pos="0.125 0.009 0"
+                                    euler="90 84 -3.042764221e-14" friction="0.7 0.01 0.005"
+                                    contype="4" conaffinity="3" mass="0.895793" class="collision" />
+                                <body name="left-tarsus" pos="0.434759 0.02 0" euler="-0 0 103">
+                                    <inertial pos="0.100777 -0.029183 0.000678" mass="1.322865"
+                                        fullinertia="0.000932 0.016409 0.016501 0.00061 0.000102 9e-06" />
+                                    <joint class="digit/tarsus/left" name="left-tarsus" />
+                                    <geom class="digit" mesh="left-tarsus" material="robot" />
+                                    <!-- Collision Geometries have mass -->
+                                    <geom type="capsule" size="0.02 0.18" pos="0.21 -0.03 0"
+                                        euler="0 90 0" friction="0.7 0.01 0.005" contype="4"
+                                        conaffinity="3" mass="1.322865" class="collision" />
+                                    <geom type="box" size="0.007 0.07 0.03" pos="-0.07 -0.012 0"
+                                        euler="5 3.975693352e-16 65" friction="0.7 0.01 0.005"
+                                        contype="4" conaffinity="3" mass="1.322865"
+                                        class="collision" />
+                                    <body name="left-heel-spring" pos="-0.01766 -0.029456 0.00104"
+                                        euler="4.47 0.32 155.8">
+                                        <inertial pos="0.049086 0.004739 -4.5e-05" mass="0.230018"
+                                            fullinertia="5.5e-05 0.00074 0.000701 1.5e-05 1e-06 0" />
+                                        <joint class="digit/heel-spring" name="left-heel-spring" />
+                                        <geom class="digit" mesh="left-heel-spring" material="robot" />
+                                    </body>
+                                    <body name="left-toe-a" pos="0.059 -0.034 -0.0276"
+                                        euler="-180 0 88.96">
+                                        <inertial pos="0.005161 1e-06 -0.002248" mass="0.139557"
+                                            fullinertia="2.9e-05 5.8e-05 7.4e-05 0 -4e-06 0" />
+                                        <joint class="digit/toe/toe-a/left" name="left-toe-a" />
+                                        <geom class="digit" mesh="left-toe-a" material="robot" />
+                                        <body name="left-toe-a-rod" pos="0.057 0 -0.008"
+                                            euler="0.34 2.14 -88.45">
+                                            <inertial pos="0.171071 0 0" mass="0.090983"
+                                                fullinertia="1e-06 0.001182 0.001182 0 0 0" />
+                                            <joint class="digit/toe/toe-a-rod" name="left-toe-a-rod" />
+                                            <geom class="digit" mesh="left-toe-a-rod"
+                                                material="robot" />
+                                            <geom type="capsule" size="0.007 0.17" pos="0.17 0 0"
+                                                euler="4 90 0" friction="0.7 0.01 0.005" contype="4"
+                                                conaffinity="3" mass="0.090983" class="collision" />
+                                        </body>
+                                    </body>
+                                    <body name="left-toe-b" pos="0.111 -0.034 0.0276"
+                                        euler="0 0 -88.96">
+                                        <inertial pos="0.005161 1e-06 -0.002248" mass="0.139557"
+                                            fullinertia="2.9e-05 5.8e-05 7.4e-05 0 -4e-06 0" />
+                                        <joint class="digit/toe/toe-b/left" name="left-toe-b" />
+                                        <geom class="digit" mesh="left-toe-b" material="robot" />
+                                        <body name="left-toe-b-rod" pos="0.057 0 -0.008"
+                                            euler="-0.22 -3.08 88.34">
+                                            <inertial pos="0.142991 0 0" mass="0.079507"
+                                                fullinertia="1e-06 0.000768 0.000768 0 0 0" />
+                                            <joint class="digit/toe/toe-b-rod" name="left-toe-b-rod" />
+                                            <geom class="digit" mesh="left-toe-b-rod"
+                                                material="robot" />
+                                            <geom type="capsule" size="0.007 0.144" pos="0.144 0 0"
+                                                euler="4 90 0" friction="0.7 0.01 0.005" contype="4"
+                                                conaffinity="3" mass="0.079507" class="collision" />
+                                        </body>
+                                    </body>
+                                    <body name="left-toe-pitch" pos="0.408 -0.04 0"
+                                        euler="-0 0 71.75">
+                                        <inertial pos="-0.000141 2e-06 3e-06" mass="0.043881"
+                                            fullinertia="5e-06 8e-06 4e-06 0 0 0" />
+                                        <joint class="digit/toe/pitch/left" name="left-toe-pitch" />
+                                        <geom class="digit" mesh="left-toe-pitch" material="robot" />
+                                        <body name="left-toe-roll" euler="0 90 0">
+                                            <inertial pos="9e-06 -0.028084 -0.023204"
+                                                mass="0.531283"
+                                                fullinertia="0.00187 0.001616 0.000843 0 0 0.000566" />
+                                            <joint class="digit/toe/roll/left" name="left-toe-roll" />
+                                            <geom class="digit" mesh="left-toe-roll"
+                                                material="robot" />
+                                            <geom type="box" size="0.04 0.1175 0.0115"
+                                                pos="0 -0.0437 -0.0255" euler="-60 0 0"
+                                                friction="0.7 0.01 0.005" contype="4"
+                                                conaffinity="3" mass="0.531283" class="collision" />
+                                            <!-- Needs to be a site -->
+                                            <body name="left-foot" pos="0 -0.05456 -0.0315"
+                                                euler="-60 0 -90">
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="left-shoulder-roll" pos="-0.001 0.12 0.4" euler="-10 -90 0">
+                <inertial pos="-0.000819 -0.003158 0.023405" mass="0.535396"
+                    fullinertia="0.000704 0.00075 0.000298 1.4e-05 1.2e-05 3.5e-05" />
+                <joint class="digit/shoulder/roll" name="left-shoulder-roll" />
+                <geom class="digit" mesh="left-shoulder-roll" material="robot" />
+                <body name="left-shoulder-pitch" pos="-0.00317 -0.011055 0.0555" euler="90 -16 -45">
+                    <inertial pos="-4.2e-05 -0.061882 -0.073788" mass="1.440357"
+                        fullinertia="0.006761 0.002087 0.005778 -6e-06 -3e-06 -0.002046" />
+                    <joint class="digit/shoulder/pitch" name="left-shoulder-pitch" />
+                    <geom class="digit" mesh="left-shoulder-pitch" material="robot" />
+                    <geom type="cylinder" size="0.038 0.07" pos="0 -0.093 -0.1" euler="90 0 -0"
+                        friction="0.7 0.01 0.005" mass="1.440357" class="collision" />
+                    <body name="left-shoulder-yaw" pos="0 -0.165 -0.1" euler="90 0 -0">
+                        <inertial pos="-3e-05 0.001937 0.11407" mass="1.065387"
+                            fullinertia="0.006967 0.007003 0.000673 -1e-06 -1e-06 -1.5e-05" />
+                        <joint class="digit/shoulder/yaw" name="left-shoulder-yaw" />
+                        <geom class="digit" mesh="left-shoulder-yaw" material="robot" />
+                        <geom type="cylinder" size="0.038 0.0675" pos="0 0 0.092558"
+                            friction="0.7 0.01 0.005" mass="1.065387" class="collision" />
+                        <geom type="cylinder" size="0.03 0.04" pos="0 0.0035 0.185"
+                            euler="90 1.590277341e-15 22.5" friction="0.7 0.01 0.005"
+                            mass="1.065387" class="collision" />
+                        <body name="left-elbow" pos="0 -0.0385 0.185"
+                            euler="90 1.590277341e-15 22.5">
+                            <inertial pos="0.107996 0.000521 -0.017765" mass="0.550582"
+                                fullinertia="0.000476 0.009564 0.009437 -2.9e-05 0.001403 9e-06" />
+                            <joint class="digit/elbow" name="left-elbow" />
+                            <geom class="digit" mesh="left-elbow" material="robot" />
+                            <geom type="cylinder" size="0.013 0.1565" pos="0.184 0.01 -0.026"
+                                euler="170 78 -180" friction="0.7 0.01 0.005" mass="0.550582"
+                                class="collision" />
+                            <geom type="sphere" size="0.015" pos="0.37937 0 -0.061912"
+                                friction="0.7 0.01 0.005" mass="0.550582"
+                                class="collision" />
+                            <!-- Needs to be a site -->
+                            <body name="left-hand" pos="0.369 0 -0.07912" euler="90 0 -10">
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="right-hip-roll" pos="-0.001 -0.091 0" euler="-21.5 -90 0">
+                <inertial pos="-0.001967 -0.000244 0.031435" mass="0.915088"
+                    fullinertia="0.001017 0.001148 0.000766 3e-06 1.3e-05 4e-06" />
+                <joint class="digit/hip/roll" name="right-hip-roll" />
+                <geom class="digit" mesh="right-hip-roll" material="robot" />
+                <body name="right-hip-yaw" pos="-0.0505 0 0.044" euler="0 -90 0">
+                    <inertial pos="1e-05 0.001945 0.042033" mass="0.818753"
+                        fullinertia="0.001627 0.001929 0.00077 1e-06 2e-06 -5.3e-05" />
+                    <joint class="digit/hip/yaw" name="right-hip-yaw" />
+                    <geom class="digit" mesh="right-hip-yaw" material="robot" />
+                    <body name="right-hip-pitch" pos="0 -0.004 0.068" euler="-90 0 -135">
+                        <inertial pos="0.060537 -0.000521 -0.038857" mass="6.244279"
+                            fullinertia="0.011533 0.033345 0.033958 0.000171 0.000148 -0.000178" />
+                        <joint class="digit/hip/pitch/right" name="right-hip-pitch" />
+                        <geom class="digit" mesh="right-hip-pitch" material="robot" />
+                        <geom type="cylinder" size="0.05 0.072" pos="0 0 -0.04"
+                            friction="0.7 0.01 0.005" contype="2" conaffinity="1" mass="6.244279"
+                            class="collision" />
+                        <geom type="cylinder" size="0.05 0.072" pos="0.12 0 -0.04"
+                            friction="0.7 0.01 0.005" contype="2" conaffinity="1" mass="6.244279"
+                            class="collision" />
+                        <geom type="box" size="0.06 0.05 0.072" pos="0.06 0 -0.04"
+                            friction="0.7 0.01 0.005" contype="2" conaffinity="1" mass="6.244279"
+                            class="collision" />
+                        <body name="right-achilles-rod" pos="0 0 0.046" euler="-4.09 0.05 82.27">
+                            <inertial pos="0.2506 0 0" mass="0.178148"
+                                fullinertia="3e-06 0.004501 0.004501 0 0 0" />
+                            <joint class="digit/achilles-rod" name="right-achilles-rod" />
+                            <geom class="digit" mesh="right-achilles-rod" material="robot" />
+                            <geom type="capsule" size="0.007 0.25" pos="0.25 0 0" euler="-4 90 0"
+                                friction="0.7 0.01 0.005" contype="2" conaffinity="1"
+                                mass="0.178148" class="collision" />
+                        </body>
+                        <body name="right-knee" pos="0.12 0 0.0045" euler="-0 0 90">
+                            <inertial pos="0.045641 -0.042154 0.001657" mass="1.227077"
+                                fullinertia="0.002643 0.005098 0.007019 0.001832 6.6e-05 -4.5e-05" />
+                            <joint class="digit/knee/right" name="right-knee" />
+                            <geom class="digit" mesh="right-knee" material="robot" />
+                            <body name="right-shin" pos="0.060677 -0.047406 0">
+                                <inertial pos="0.174265 -0.010265 0.00107" mass="0.895793"
+                                    fullinertia="0.001128 0.022492 0.022793 -0.001098 0.000196 3e-06" />
+                                <joint class="digit/shin" name="right-shin" type="hinge"
+                                    axis="0 0 1" stiffness="6000" frictionloss="0" damping="0"
+                                    armature="0" limited="false" />
+                                <geom class="digit" mesh="right-shin" material="robot" />
+                                <geom type="cylinder" size="0.03 0.1715" pos="0.23 0 0"
+                                    euler="0 90 0" friction="0.7 0.01 0.005" contype="2"
+                                    conaffinity="1" mass="0.895793" class="collision" />
+                                <geom type="cylinder" size="0.05 0.1" pos="0.125 -0.009 0"
+                                    euler="-90 84 3.042764221e-14" friction="0.7 0.01 0.005"
+                                    contype="2" conaffinity="1" mass="0.895793" class="collision" />
+                                <body name="right-tarsus" pos="0.434759 -0.02 0" euler="0 0 -103">
+                                    <inertial pos="0.100777 0.029183 0.000678" mass="1.322865"
+                                        fullinertia="0.000932 0.016409 0.016501 -0.00061 0.000102 -9e-06" />
+                                    <joint class="digit/tarsus/right" name="right-tarsus" />
+                                    <geom class="digit" mesh="right-tarsus" material="robot" />
+                                    <geom type="capsule" size="0.02 0.18" pos="0.21 0.03 0"
+                                        euler="0 90 0" friction="0.7 0.01 0.005" contype="2"
+                                        conaffinity="1" mass="1.322865" class="collision" />
+                                    <geom type="box" size="0.007 0.07 0.03" pos="-0.07 0.012 0"
+                                        euler="-5 3.975693352e-16 -65" friction="0.7 0.01 0.005"
+                                        contype="2" conaffinity="1" mass="1.322865"
+                                        class="collision" />
+                                    <body name="right-heel-spring" pos="-0.01766 0.029456 0.00104"
+                                        euler="-4.47 0.32 -155.8">
+                                        <inertial pos="0.049086 -0.004739 -4.5e-05" mass="0.230018"
+                                            fullinertia="5.5e-05 0.00074 0.000701 -1.5e-05 1e-06 0" />
+                                        <joint class="digit/heel-spring" name="right-heel-spring" />
+                                        <geom type="mesh" mesh="right-heel-spring" pos="0 0 0"
+                                            material="robot" />
+                                    </body>
+                                    <body name="right-toe-a" pos="0.059 0.034 -0.0276"
+                                        euler="180 0 -88.96">
+                                        <inertial pos="0.005161 -1e-06 -0.002248" mass="0.139557"
+                                            fullinertia="2.9e-05 5.8e-05 7.4e-05 0 -4e-06 0" />
+                                        <joint class="digit/toe/toe-a/right" name="right-toe-a" />
+                                        <geom class="digit" mesh="right-toe-a" material="robot" />
+                                        <body name="right-toe-a-rod" pos="0.057 0 -0.008"
+                                            euler="-0.34 2.14 88.45">
+                                            <inertial pos="0.171071 0 0" mass="0.090983"
+                                                fullinertia="1e-06 0.001182 0.001182 0 0 0" />
+                                            <joint class="digit/toe/toe-a-rod"
+                                                name="right-toe-a-rod" />
+                                            <geom type="mesh" mesh="right-toe-a-rod" pos="0 0 0"
+                                                material="robot" />
+                                            <geom type="capsule" size="0.007 0.17" pos="0.17 0 0"
+                                                euler="-4 90 0" friction="0.7 0.01 0.005"
+                                                contype="2" conaffinity="1" mass="0.090983"
+                                                class="collision" />
+                                        </body>
+                                    </body>
+                                    <body name="right-toe-b" pos="0.111 0.034 0.0276"
+                                        euler="-0 0 88.96">
+                                        <inertial pos="0.005161 -1e-06 -0.002248" mass="0.139557"
+                                            fullinertia="2.9e-05 5.8e-05 7.4e-05 0 -4e-06 0" />
+                                        <joint class="digit/toe/toe-b/right" name="right-toe-b" />
+                                        <geom class="digit" mesh="right-toe-b" material="robot" />
+                                        <body name="right-toe-b-rod" pos="0.057 0 -0.008"
+                                            euler="0.22 -3.08 -88.34">
+                                            <inertial pos="0.142991 0 0" mass="0.079507"
+                                                fullinertia="1e-06 0.000768 0.000768 0 0 0" />
+                                            <joint class="digit/toe/toe-b-rod"
+                                                name="right-toe-b-rod" />
+                                            <geom type="mesh" mesh="right-toe-b-rod"
+                                                material="robot" />
+                                            <geom type="capsule" size="0.007 0.144" pos="0.144 0 0"
+                                                euler="-4 90 0" friction="0.7 0.01 0.005"
+                                                contype="2" conaffinity="1" mass="0.079507"
+                                                class="collision" />
+                                        </body>
+                                    </body>
+                                    <body name="right-toe-pitch" pos="0.408 0.04 0"
+                                        euler="0 0 -71.75">
+                                        <inertial pos="-0.000141 -2e-06 3e-06" mass="0.043881"
+                                            fullinertia="5e-06 8e-06 4e-06 0 0 0" />
+                                        <joint class="digit/toe/pitch/right"
+                                            name="right-toe-pitch" />
+                                        <geom class="digit" mesh="right-toe-pitch" material="robot" />
+                                        <body name="right-toe-roll" euler="0 90 0">
+                                            <inertial pos="9e-06 0.028084 -0.023204" mass="0.531283"
+                                                fullinertia="0.00187 0.001616 0.000843 0 0 -0.000566" />
+                                            <joint class="digit/toe/roll/right"
+                                                name="right-toe-roll" />
+                                            <geom class="digit" mesh="right-toe-roll"
+                                                material="robot" />
+                                            <geom type="box" size="0.04 0.1175 0.0115"
+                                                pos="0 0.0437 -0.0255" euler="60 0 -0"
+                                                friction="0.7 0.01 0.005" contype="2"
+                                                conaffinity="1" mass="0.531283" class="collision" />
+                                            <body name="right-foot" pos="0 0.05456 -0.0315"
+                                                euler="60 0 90">
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="right-shoulder-roll" pos="-0.001 -0.12 0.4" euler="10 -90 0">
+                <inertial pos="-0.000819 0.003158 0.023405" mass="0.535396"
+                    fullinertia="0.000704 0.00075 0.000298 -1.4e-05 1.2e-05 -3.5e-05" />
+                <joint class="digit/shoulder/roll" name="right-shoulder-roll" />
+                <geom class="digit" mesh="right-shoulder-roll" material="robot" />
+                <body name="right-shoulder-pitch" pos="-0.00317 0.011055 0.0555" euler="-90 -16 45">
+                    <inertial pos="-4.2e-05 0.061882 -0.073788" mass="1.440357"
+                        fullinertia="0.006761 0.002087 0.005778 6e-06 -3e-06 0.002046" />
+                    <joint class="digit/shoulder/pitch" name="right-shoulder-pitch" />
+                    <geom class="digit" mesh="right-shoulder-pitch" material="robot" />
+                    <geom type="cylinder" size="0.038 0.07" pos="0 0.093 -0.1" euler="-90 0 0"
+                        friction="0.7 0.01 0.005" mass="1.440357" class="collision" />
+                    <body name="right-shoulder-yaw" pos="0 0.165 -0.1" euler="-90 0 0">
+                        <inertial pos="-3e-05 -0.001937 0.11407" mass="1.065387"
+                            fullinertia="0.006967 0.007003 0.000673 1e-06 -1e-06 1.5e-05" />
+                        <joint class="digit/shoulder/yaw" name="right-shoulder-yaw" />
+                        <geom class="digit" mesh="right-shoulder-yaw" material="robot" />
+                        <geom type="cylinder" size="0.038 0.0675" pos="0 0 0.092558"
+                            friction="0.7 0.01 0.005" mass="1.065387" class="collision" />
+                        <geom type="cylinder" size="0.03 0.04" pos="0 -0.0035 0.185"
+                            euler="-90 1.590277341e-15 -22.5" friction="0.7 0.01 0.005"
+                            mass="1.065387" class="collision" />
+                        <body name="right-elbow" pos="0 0.0385 0.185"
+                            euler="-90 1.590277341e-15 -22.5">
+                            <inertial pos="0.107996 -0.000521 -0.017765" mass="0.550582"
+                                fullinertia="0.000476 0.009564 0.009437 2.9e-05 0.001403 -9e-06" />
+                            <joint class="digit/elbow" name="right-elbow" />
+                            <geom class="digit" mesh="right-elbow" material="robot" />
+                            <geom type="cylinder" size="0.013 0.1565" pos="0.184 -0.01 -0.026"
+                                euler="-170 78 180" friction="0.7 0.01 0.005" mass="0.550582"
+                                class="collision" />
+                            <geom type="sphere" size="0.015" pos="0.37937 0 -0.061912"
+                                friction="0.7 0.01 0.005" mass="0.550582"
+                                class="collision" />
+                            <body name="right-hand" pos="0.369 0 -0.07912" euler="-90 0 10">
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
 </mujoco>
